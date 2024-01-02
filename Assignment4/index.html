@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 4</title>
+    <script>
+      function LetterChanges(str) {
+        const vowels = ["a", "e", "i", "o", "u"];
+        let modifiedText = "";
+        for (let i = 0; i < str.length; i++) {
+          let letter = "";
+          if (str[i] == "z") {
+            letter = "a";
+          } else {
+            letter = String.fromCharCode(str[i].charCodeAt(0) + 1);
+          }
+          if (vowels.includes(letter)) {
+            letter = letter.toUpperCase();
+          }
+          modifiedText += letter;
+        }
+        return modifiedText;
+      }
+
+      function load() {
+        const myText = document.getElementById("text").value;
+        if (myText.length == 0) {
+          alert("Input is empty!");
+        } else {
+          document.getElementById("result").innerHTML = LetterChanges(myText);
+          document.getElementById("form").reset();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <form id="form">
+        <label for="text">Text : </label>
+        <input type="text" id="text" placeholder="Enter a Text" />
+        <input type="button" onclick="load()" value="Modify" />
+      </form>
+    </div>
+    <div>
+      <h2 id="result"></h2>
+    </div>
+  </body>
+</html>
