@@ -13,8 +13,12 @@
 
         let total = 0;
         const diceResult = [];
-
+        const regex = /^([1-9][0-9]?|100)d([1-9][0-9]?|100)$/;
         //validating user input values
+
+        if(!regex.test(str)){
+          return "Invalid Input";
+        }
         if (numberOfDice < 1 || numberOfDice > 100) {
           return "Number of dice out of range ! Range[1-100]";
         }
