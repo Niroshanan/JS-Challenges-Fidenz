@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 6</title>
+    <script>
+      function findMaxSquareMatrix(matrix) {
+        const rows = matrix.length;
+        const column = matrix[0].length;
+        let maxSquareLen = 0;
+
+        const dp = [];
+
+        for (let i = 0; i < rows; i++) {
+          let subarray = [];
+          for (let j = 0; j < column; j++) {
+            if (i == 0 || j == 0) {
+              subarray.push(matrix[i][j]);
+            } else {
+              subarray.push(0);
+            }
+          }
+          dp.push(subarray);
+        }
+
+        for (let i = 1; i < dp.length; i++) {
+          for (let j = 1; j < dp[i].length; j++) {
+            if (matrix[i][j] == "1")
+              dp[i][j] =
+                Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1;
+            if (dp[i][j] > maxSquareLen) {
+              maxSquareLen = dp[i][j];
+            }
+          }
+        }
+        return maxSquareLen * maxSquareLen;
+      }
+
+      function load() {
+        const matrix = ["10100", "10111", "11111", "10010"];
+        let matStr = `Matrix <br/>`;
+        for (let i = 0; i < matrix.length; i++) {
+          for (let j = 0; j < matrix[0].length; j++) {
+            matStr += `${matrix[i][j]} `;
+          }
+          matStr += "<br/>";
+        }
+        document.getElementById("matrix").innerHTML = matStr;
+        document.getElementById("result").innerHTML =
+          `Result <br/>  ${findMaxSquareMatrix(matrix)}`;
+      }
+    </script>
+  </head>
+  <body onload="load()">
+    <div>
+      <h2 id="matrix"></h2>
+      <h2 id="result"></h2>
+    </div>
+  </body>
+</html>
