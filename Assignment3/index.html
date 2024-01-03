@@ -18,9 +18,9 @@
               scaleWeights[0] == scaleWeights[1] + availableWeights[i]
             ) {
               if (scaleWeights[0] > scaleWeights[1]) {
-                return `Right side ${availableWeights[i]}`;
+                return `Left side: 0 | Right side: ${availableWeights[i]}`;
               } else {
-                return `Left side ${availableWeights[i]}`;
+                return `Left side: ${availableWeights[i]} | Right side: 0`;
               }
             }
 
@@ -32,9 +32,9 @@
                   scaleWeights[1] + availableWeights[i]
               ) {
                 if (scaleWeights[0] > scaleWeights[1]) {
-                  return `Left side ${availableWeights[j]} | Right side  ${availableWeights[i]}`;
+                  return `Left side: ${availableWeights[j]} | Right side:  ${availableWeights[i]}`;
                 } else {
-                  return `Left side ${availableWeights[i]} | Right side  ${availableWeights[j]}`;
+                  return `Left side: ${availableWeights[i]} | Right side:  ${availableWeights[j]}`;
                 }
               }
 
@@ -45,21 +45,26 @@
                   scaleWeights[1] + availableWeights[i] + availableWeights[j]
               ) {
                 if (scaleWeights[0] > scaleWeights[1]) {
-                  return `Left Side :0 |right side: ${availableWeights[i]} ,  ${availableWeights[j]}`;
+                  return `Left Side: 0 | Right side: ${availableWeights[i]} ,  ${availableWeights[j]}`;
                 } else {
-                  return `Left Side : ${availableWeights[i]}, ${availableWeights[j]} | right side :0`;
+                  return `Left Side: ${availableWeights[i]}, ${availableWeights[j]} | Right side: 0`;
                 }
               }
             }
           }
         }
-        return "Not possible";
+        return "Not Possible";
       }
       function load() {
         let weightInputString = document.getElementById("text").value;
         weightInputString = weightInputString.trim();
         const input = weightInputString.split(" ");
-        document.getElementById("result").innerHTML = ScaleBalancing(input);
+        try {
+          document.getElementById("result").innerHTML = ScaleBalancing(input);
+        } catch (error) {
+          
+          document.getElementById("result").innerHTML = "Invalid Input";
+        }
       }
     </script>
   </head>
@@ -67,9 +72,9 @@
     <div>
       <form id="form">
         <p>
-          Instruction: Enter weights on the balance scale within first square brackets
-          separated with comma and enter the list of available weights within
-          the second square brackets separated with comma eg:
+          Instruction: Enter weights on the balance scale within first square
+          brackets separated with comma and enter the list of available weights
+          within the second square brackets separated with comma eg:
           <code>[13,4] [1,2,3,6,14]</code>
         </p>
         <input
