@@ -56,12 +56,33 @@
         return "Not possible";
       }
       function load() {
-        const input = ["[3, 4]", "[1, 2, 7, 7]"];
+        let weightInputString = document.getElementById("text").value;
+        weightInputString = weightInputString.trim();
+        const input = weightInputString.split(" ");
+        console.log(input);
         document.getElementById("result").innerHTML = ScaleBalancing(input);
       }
     </script>
   </head>
-  <body onload="load()">
+  <body>
+    <div>
+      <form id="form">
+        <p>
+          Instruction: Enter weights on the balance scale within left brackets
+          separated with comma and enter the list of available weights within
+          the second square brackets separated with comma
+          eg: <code>[13,4] [1,2,3,6,14]</code>
+        </p>
+        <input
+          type="text"
+          id="text"
+          name="text"
+          placeholder="Enter a Number "
+          value="[] []"
+        />
+        <input type="button" onclick="load()" value="Find Factorial" />
+      </form>
+    </div>
     <div>
       <h2 id="result"></h2>
     </div>
