@@ -12,6 +12,8 @@
           let letter = "";
           if (str[i] == "z") {
             letter = "a";
+          } else if (str[i] == " ") {
+            letter = " ";
           } else {
             letter = String.fromCharCode(str[i].charCodeAt(0) + 1);
           }
