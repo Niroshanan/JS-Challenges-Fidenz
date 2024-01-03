@@ -15,19 +15,19 @@
         const diceResult = [];
 
         if (numberOfDice < 1 || numberOfDice > 100) {
-          alert("Number of dice out of range !");
+          return "Number of dice out of range ! Range[1-100]"
         }
         if (numberOfSide < 2 || numberOfSide > 100) {
-          alert("Number of sides out of range !");
+          return "Number of sides out of range ! Range[2-100]"
         }
         for (let i = 0; i < numberOfDice; i++) {
           let randomNumber = Math.floor(Math.random() * numberOfSide) + 1;
           diceResult.push(randomNumber);
           total += randomNumber;
         }
-        let result = `${total} : `
-        diceResult.forEach(element => {
-            result += `${element} `
+        let result = `${total} : `;
+        diceResult.forEach((element) => {
+          result += `${element} `;
         });
         return result;
       }
@@ -45,8 +45,11 @@
   <body>
     <div>
       <form id="form">
-        <label for="text">Text : </label>
-        <input type="text" id="text" placeholder="Enter a Text eg:{3d6}" />
+        <p>
+          Instruction : Enter number of dice infront of d and enter number of
+          sides after d. eg <code>3d6</code>
+        </p>
+        <input type="text" id="text" placeholder="Enter a Text eg:3d6" />
         <input type="button" onclick="load()" value="Roll" />
       </form>
     </div>
