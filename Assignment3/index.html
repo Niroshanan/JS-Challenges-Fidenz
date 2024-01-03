@@ -8,10 +8,12 @@
       function ScaleBalancing(input) {
         const scaleWeights = JSON.parse(input[0]);
         const availableWeights = JSON.parse(input[1]);
+        availableWeights.sort((a, b) => a - b);
 
         if (scaleWeights[0] == scaleWeights[1]) {
           return "Equals";
         } else {
+          //loop through available weightscheck whether balance the scale using one weight
           for (let i = 0; i < availableWeights.length; i++) {
             if (
               scaleWeights[0] + availableWeights[i] == scaleWeights[1] ||
@@ -23,8 +25,11 @@
                 return `Left side: ${availableWeights[i]} | Right side: 0`;
               }
             }
-
+          }
+          //check whether balance the scale using two weight
+          for (let i = 0; i < availableWeights.length - 1; i++) {
             for (let j = i + 1; j < availableWeights.length; j++) {
+              //assiging weight to both sides
               if (
                 scaleWeights[0] + availableWeights[i] ==
                   scaleWeights[1] + availableWeights[j] ||
@@ -32,12 +37,12 @@
                   scaleWeights[1] + availableWeights[i]
               ) {
                 if (scaleWeights[0] > scaleWeights[1]) {
-                  return `Left side: ${availableWeights[j]} | Right side:  ${availableWeights[i]}`;
-                } else {
                   return `Left side: ${availableWeights[i]} | Right side:  ${availableWeights[j]}`;
+                } else {
+                  return `Left side: ${availableWeights[j]} | Right side:  ${availableWeights[i]}`;
                 }
               }
-
+              //assiging weight to same sides
               if (
                 scaleWeights[0] + availableWeights[i] + availableWeights[j] ==
                   scaleWeights[1] ||
@@ -45,9 +50,9 @@
                   scaleWeights[1] + availableWeights[i] + availableWeights[j]
               ) {
                 if (scaleWeights[0] > scaleWeights[1]) {
-                  return `Left Side: 0 | Right side: ${availableWeights[i]} ,  ${availableWeights[j]}`;
+                  return `Left side: 0 | Right side: ${availableWeights[i]} ,  ${availableWeights[j]}`;
                 } else {
-                  return `Left Side: ${availableWeights[i]}, ${availableWeights[j]} | Right side: 0`;
+                  return `Left side: ${availableWeights[i]}, ${availableWeights[j]} | Right side: 0`;
                 }
               }
             }
@@ -55,16 +60,18 @@
         }
         return "Not Possible";
       }
+
       function load() {
-        let weightInputString = document.getElementById("text").value;
+        let weightInputString = document.forms["form"]["text"].value;
         weightInputString = weightInputString.trim();
         const input = weightInputString.split(" ");
+        document.getElementById("input").innerHTML = weightInputString;
         try {
           document.getElementById("result").innerHTML = ScaleBalancing(input);
         } catch (error) {
-          
           document.getElementById("result").innerHTML = "Invalid Input";
         }
+        document.getElementById("form").reset();
       }
     </script>
   </head>
@@ -88,6 +95,7 @@
       </form>
     </div>
     <div>
+      <h2 id="input"></h2>
       <h2 id="result"></h2>
     </div>
   </body>

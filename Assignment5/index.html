@@ -14,11 +14,12 @@
         let total = 0;
         const diceResult = [];
 
+        //validating user input values
         if (numberOfDice < 1 || numberOfDice > 100) {
-          return "Number of dice out of range ! Range[1-100]"
+          return "Number of dice out of range ! Range[1-100]";
         }
         if (numberOfSide < 2 || numberOfSide > 100) {
-          return "Number of sides out of range ! Range[2-100]"
+          return "Number of sides out of range ! Range[2-100]";
         }
         for (let i = 0; i < numberOfDice; i++) {
           let randomNumber = Math.floor(Math.random() * numberOfSide) + 1;
@@ -32,7 +33,7 @@
         return result;
       }
       function load() {
-        let myText = document.getElementById("text").value;
+        let myText = document.forms["form"]["text"].value;
         if (myText.length == 0) {
           alert("Input is empty!");
         } else {
@@ -49,7 +50,12 @@
           Instruction : Enter number of dice infront of d and enter number of
           sides after d. eg <code>3d6</code>
         </p>
-        <input type="text" id="text" placeholder="Enter a Text eg:3d6" />
+        <input
+          type="text"
+          id="text"
+          name="text"
+          placeholder="Enter a Text eg:3d6"
+        />
         <input type="button" onclick="load()" value="Roll" />
       </form>
     </div>

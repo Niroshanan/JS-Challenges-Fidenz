@@ -6,12 +6,13 @@
     <title>Assignment 6</title>
     <script>
       function findMaxSquareMatrix(matrix) {
+
         const rows = matrix.length;
         const column = matrix[0].length;
         let maxSquareLen = 0;
 
         const dp = [];
-
+        //creating an 0 filled array with first row and column same as input matrix
         for (let i = 0; i < rows; i++) {
           let subarray = [];
           for (let j = 0; j < column; j++) {
@@ -24,6 +25,7 @@
           dp.push(subarray);
         }
 
+        //marking the dp matrix with possible square length
         for (let i = 1; i < dp.length; i++) {
           for (let j = 1; j < dp[i].length; j++) {
             if (matrix[i][j] == "1")
@@ -38,10 +40,11 @@
       }
 
       function load() {
-        let strInput = document.getElementById("text").value;
+        let strInput = document.forms["form"]["text"].value
         strInput = strInput.trim();
         const matrix = strInput.split(" ");
 
+        //print the input matrix
         let matStr = `Matrix <br/>`;
         for (let i = 0; i < matrix.length; i++) {
           for (let j = 0; j < matrix[0].length; j++) {
@@ -59,10 +62,9 @@
       <form id="form">
         <p><label for="text">Matrix Text : </label></p>
         <textarea type="text" id="text" name="text" placeholder="Enter a text" rows="3" cols="25" ></textarea>
-        <small>
-          Format :Add a space between each row in the matrix {eg:"10100 10111
-          11111 10010"}</small
-        >
+        <p>
+          Format :Add a space between each row in the matrix eg: <code>10100 10111
+            11111 10010</code></p>
         <br />
         <input type="button" onclick="load()" value="Check" />
       </form>

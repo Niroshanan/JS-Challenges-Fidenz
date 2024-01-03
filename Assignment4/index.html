@@ -8,6 +8,7 @@
       function LetterChanges(str) {
         const vowels = ["a", "e", "i", "o", "u"];
         let modifiedText = "";
+
         for (let i = 0; i < str.length; i++) {
           let letter = "";
           if (str[i] == "z") {
@@ -26,7 +27,7 @@
       }
 
       function load() {
-        const myText = document.getElementById("text").value;
+        const myText = document.forms["form"]["text"].value;
         if (myText.length == 0) {
           alert("Input is empty!");
         } else {
@@ -40,7 +41,7 @@
     <div>
       <form id="form">
         <label for="text">Text : </label>
-        <input type="text" id="text" placeholder="Enter a Text" />
+        <input type="text" id="text" name="text" placeholder="Enter a Text" />
         <input type="button" onclick="load()" value="Modify" />
       </form>
     </div>
