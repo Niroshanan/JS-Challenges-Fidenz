@@ -38,7 +38,10 @@
       }
 
       function load() {
-        const matrix = ["10100", "10111", "11111", "10010"];
+        let strInput = document.getElementById("text").value;
+        strInput = strInput.trim();
+        const matrix = strInput.split(" ");
+
         let matStr = `Matrix <br/>`;
         for (let i = 0; i < matrix.length; i++) {
           for (let j = 0; j < matrix[0].length; j++) {
@@ -47,12 +50,23 @@
           matStr += "<br/>";
         }
         document.getElementById("matrix").innerHTML = matStr;
-        document.getElementById("result").innerHTML =
-          `Result <br/>  ${findMaxSquareMatrix(matrix)}`;
+        document.getElementById("result").innerHTML = `Result <br/>  ${findMaxSquareMatrix(matrix)}`;
+        document.getElementById("form").reset();
       }
     </script>
   </head>
-  <body onload="load()">
+    <div>
+      <form id="form">
+        <p><label for="text">Matrix Text : </label></p>
+        <textarea type="text" id="text" name="text" placeholder="Enter a text" rows="3" cols="25" ></textarea>
+        <small>
+          Format :Add a space between each row in the matrix {eg:"10100 10111
+          11111 10010"}</small
+        >
+        <br />
+        <input type="button" onclick="load()" value="Check" />
+      </form>
+    </div>
     <div>
       <h2 id="matrix"></h2>
       <h2 id="result"></h2>
