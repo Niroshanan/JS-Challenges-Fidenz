@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 3</title>
+    <script>
+      function ScaleBalancing(input) {
+        const scaleWeights = JSON.parse(input[0]);
+        const availableWeights = JSON.parse(input[1]);
+
+        if (scaleWeights[0] == scaleWeights[1]) {
+          return "Equals";
+        } else {
+          for (let i = 0; i < availableWeights.length; i++) {
+            if (
+              scaleWeights[0] + availableWeights[i] == scaleWeights[1] ||
+              scaleWeights[0] == scaleWeights[1] + availableWeights[i]
+            ) {
+              if (scaleWeights[0] > scaleWeights[1]) {
+                return `Right side ${availableWeights[i]}`;
+              } else {
+                return `Left side ${availableWeights[i]}`;
+              }
+            }
+
+            for (let j = i + 1; j < availableWeights.length; j++) {
+              if (
+                scaleWeights[0] + availableWeights[i] ==
+                  scaleWeights[1] + availableWeights[j] ||
+                scaleWeights[0] + availableWeights[j] ==
+                  scaleWeights[1] + availableWeights[i]
+              ) {
+                if (scaleWeights[0] > scaleWeights[1]) {
+                  return `Left side ${availableWeights[j]} | Right side  ${availableWeights[i]}`;
+                } else {
+                  return `Left side ${availableWeights[i]} | Right side  ${availableWeights[j]}`;
+                }
+              }
+
+              if (
+                scaleWeights[0] + availableWeights[i] + availableWeights[j] ==
+                  scaleWeights[1] ||
+                scaleWeights[0] ==
+                  scaleWeights[1] + availableWeights[i] + availableWeights[j]
+              ) {
+                if (scaleWeights[0] > scaleWeights[1]) {
+                  return `Left Side :0 |right side: ${availableWeights[i]} ,  ${availableWeights[j]}`;
+                } else {
+                  return `Left Side : ${availableWeights[i]}, ${availableWeights[j]} | right side :0`;
+                }
+              }
+            }
+          }
+        }
+        return "Not possible";
+      }
+      function load() {
+        const input = ["[3, 4]", "[1, 2, 7, 7]"];
+        document.getElementById("result").innerHTML = ScaleBalancing(input);
+      }
+    </script>
+  </head>
+  <body onload="load()">
+    <div>
+      <h2 id="result"></h2>
+    </div>
+  </body>
+</html>
